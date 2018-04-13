@@ -1,5 +1,8 @@
 Merge conflict with branches
 
+-->Merge Conflict here
+
+
 #Now Travis added Too :)
 
 
