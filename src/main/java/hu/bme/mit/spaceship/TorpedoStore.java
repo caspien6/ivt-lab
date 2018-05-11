@@ -5,7 +5,7 @@ import java.util.Random;
 /**
 * Class storing and managing the torpedoes of a ship
 */
-public class TorpedoStore {
+public class TorpedoStore implements TorpedoStoreInterface {
 
   private double failureRate = 0.0;
 
@@ -26,6 +26,7 @@ public class TorpedoStore {
     }
   }
 
+  @Override
   public boolean fire(int numberOfTorpedos){
     if(numberOfTorpedos < 1 || numberOfTorpedos > this.torpedoCount){
       throw new IllegalArgumentException("numberOfTorpedos");
@@ -48,10 +49,12 @@ public class TorpedoStore {
     return success;
   }
 
+  @Override
   public boolean isEmpty(){
     return this.torpedoCount <= 0;
   }
 
+  @Override
   public int getTorpedoCount() {
     return this.torpedoCount;
   }

@@ -5,13 +5,13 @@ package hu.bme.mit.spaceship;
 */
 public class GT4500 implements SpaceShip {
 
-  private TorpedoStore primaryTorpedoStore;
-  private TorpedoStore secondaryTorpedoStore;
+  private TorpedoStoreInterface primaryTorpedoStore;
+  private TorpedoStoreInterface secondaryTorpedoStore;
 
 
-  public GT4500() {
-    this.primaryTorpedoStore = new TorpedoStore(10);
-    this.secondaryTorpedoStore = new TorpedoStore(10);
+  public GT4500(TorpedoStoreInterface primarytorpedostoreinterface, TorpedoStoreInterface secondarytorpedostoreinterface) {
+    this.primaryTorpedoStore = primarytorpedostoreinterface;
+    this.secondaryTorpedoStore = secondarytorpedostoreinterface;
   }
 
   public boolean fireLaser(FiringMode firingMode) {
@@ -36,20 +36,25 @@ public class GT4500 implements SpaceShip {
   public boolean fireTorpedo(FiringMode firingMode) {
 
     boolean firingSuccess = false;
+    try{
+    	if (firingMode == FiringMode.SINGLE ) {
+            if (! secondaryTorpedoStore.isEmpty()) {
+              firingSuccess = secondaryTorpedoStore.fire(1);
 
-    if (firingMode == FiringMode.SINGLE ) {
-          if (! secondaryTorpedoStore.isEmpty()) {
-            firingSuccess = secondaryTorpedoStore.fire(1);
-
-          }
-          else if (! primaryTorpedoStore.isEmpty()){
-              firingSuccess = primaryTorpedoStore.fire(1);
-                        }
-     }
-     else if (firingMode == FiringMode.ALL){
-         firingSuccess = true;
- 	// try to fire both of the torpedo stores
+            }
+            else if (! primaryTorpedoStore.isEmpty()){
+                firingSuccess = primaryTorpedoStore.fire(1);
+                          }
+       }
+       else if (firingMode == FiringMode.ALL){
+           firingSuccess = true;
+   	// try to fire both of the torpedo stores
+      }
     }
+    catch (Exception e) {
+		return false;
+	}
+    
             // if both of the stores are empty, nothing can be done, return
     return firingSuccess;
 
