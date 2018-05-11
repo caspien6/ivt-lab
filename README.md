@@ -1,9 +1,4 @@
-Merge conflict with branches
-
--->Merge Conflict here
-
-
-#Now Travis added Too :)
+[![Build Status](https://travis-ci.org/caspien6/ivt-lab.svg?branch=master)](https://travis-ci.org/caspien6/ivt-lab)
 
 
 # IVT Spaceship
